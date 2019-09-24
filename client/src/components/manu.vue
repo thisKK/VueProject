@@ -124,8 +124,7 @@
                     <mdb-mask flex-center waves overlay="white-slight"></mdb-mask>
                   </a>
                    <mdb-card-image 
-                      v-for="image in design.menuDesign.foodImage" :key="image.id" :value="image.id"
-                      src="{{}}"
+                      src=""
                       alt="Card image cap"
                     ></mdb-card-image>
                 </mdb-view>
@@ -268,6 +267,14 @@ export default {
         }
       ).catch(err => {console.log(err)});
     },
+
+    getMenuDesign(){
+      axios.get("http://localhost:9000/getMenuDesign").then(
+        response =>{
+          this.menuDesign = response.data
+        }
+      ).catch(err => {console.log(err)});
+    },
   
   saveCreateMenu(){
         let currentObj = this;
@@ -291,6 +298,7 @@ export default {
         )
         .then(response => {
           alert("ออกแบบเมนูสำเร็จ")
+          getMenuDesign();
           currentObj.output = response.data;
         })
         .catch(e => {
@@ -305,6 +313,7 @@ export default {
     this.getFoodImage();
     this.getMenuList();
     this.getFoodTechinque();
+    this.getMenuDesign();
   }
 };
 </script>
