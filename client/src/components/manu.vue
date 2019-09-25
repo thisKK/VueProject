@@ -138,7 +138,7 @@
                   </mdb-card-body>
                 </mdb-card>
               </div>
-        </div>
+        </div >
   </div>
 </template>
 
@@ -282,7 +282,7 @@ export default {
           currentObj.getMenuDesign();
         })
         .catch(e => {
-           alert("เกิดข้อผิดพลาด "+error);
+           alert("เกิดข้อผิดพลาด "+e);
            currentObj.output = error;
         });
       this.submitted = true;
@@ -308,11 +308,6 @@ mdb-card-text {
 text{
   text-align: center;
 }
-div.mask.flex-center.rgba-white-slight.ripple-parent {
-  width: 360px!important;
-  height: 270px!important;
-  object-fit: cover !important;
-}
 body, html {
   height: 100%;
 }
@@ -324,8 +319,7 @@ background-image: url("https://www.bagri-restaurant.bg/wp-content/uploads/2014/0
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 100%;
-  
+  height: auto;
 }
 .mycard {
   width: 300px!important;
