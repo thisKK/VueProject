@@ -56,6 +56,6 @@ public class MenuDesignController {
     newMenuDesign.setFoodTechinque(foodTechinque);
     newMenuDesign.setDesciption(desc);
 
-    return menuDesignRepository.save(newMenuDesign); //บันทึก Objcet ชื่อ VideoRental
+    return menuDesignRepository.save(newMenuDesign); //บันทึก Objcet ชื่อ MenuDesign
     }
 }

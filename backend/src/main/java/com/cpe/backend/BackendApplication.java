@@ -24,8 +24,10 @@ public class BackendApplication {
 
 			data = new Object[][]{
 				{"ต้มยำกุ้ง","http://www.thaifoodheritage.com/uploads/recipe_list/gallery/e3de5-jpg.jpeg"},
-				{"rice2","www.yahoo.com"},
-				{"rice3","www.goo.com"}
+				{"ข้าวผัด","https://food.mthai.com/app/uploads/2019/02/Fried-Rice-with-Shrimp-Fat.jpg"},
+				{"ข้าวราดกระเพราหมู","https://image.makewebeasy.net/makeweb/0/zs7gnRKvE/TH/%E0%B8%9C%E0%B8%B1%E0%B8%94%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%9E%E0%B8%A3%E0%B8%B2%E0%B9%84%E0%B8%81%E0%B9%88.jpg"},
+				{"ปลานึ่งมะนาว","https://food.mthai.com/app/uploads/2017/02/Spicy-fish-2.jpg"},
+				{"ผัดไทย","https://img.kapook.com/u/2015/surauch/cook2/PT1.jpg"}
 			};
 
 			for(int i= 0 ;i<data.length;i++){
@@ -38,7 +40,8 @@ public class BackendApplication {
 			data = new Object[][]{
 				{"ทอด"},
 				{"ต้ม"},
-				{"นิ่ง"}
+				{"นิ่ง"},
+				{"ผัด"}
 			};
 
 			for(int i= 0 ;i<data.length;i++){
@@ -48,9 +51,11 @@ public class BackendApplication {
 			}
 
 			data = new Object[][]{
-				{"ทอดมัน",50,1},
-				{"ต้มยำ",70,2},
-				{"ปลานิ่งมะนาว",1503,2}
+				{"ต้มยำกุ้ง",70,5},
+				{"ข้าวผัด",50,5},
+				{"ปลานิ่งมะนาว",80,2},
+				{"ข้าวราดกระเพราหมู",50,2},
+				{"ผัดไทย",50,2},
 			};
 
 			for(int i= 0 ;i<data.length;i++){
