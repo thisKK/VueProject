@@ -42,18 +42,19 @@ public class MenuDesignController {
     @PostMapping("/createMenuDesign/{menuListId}/{foodImageId}/{foodTechinqueId}/{desc}")
     public MenuDesign newMenuDesign(MenuDesign newMenuDesign,
     @PathVariable long menuListId,
-    @PathVariable long foodImageId,
     @PathVariable long foodTechinqueId,
+    @PathVariable long foodImageId,
     @PathVariable String desc) {
-    //VideoRental newVideoRental = new VideoRental();
+
 
     MenuList menuList = menuListRepository.findById(menuListId);
-    FoodImage foodImage = foodImageRepository.findById(foodImageId);
     FoodTechinque foodTechinque = foodTechinqueRepository.findById(foodTechinqueId);
+    FoodImage foodImage = foodImageRepository.findById(foodImageId);
+    
 
     newMenuDesign.setMenuList(menuList);
-    newMenuDesign.setFoodImage(foodImage);
     newMenuDesign.setFoodTechinque(foodTechinque);
+    newMenuDesign.setFoodImage(foodImage);
     newMenuDesign.setDesciption(desc);
 
     return menuDesignRepository.save(newMenuDesign); //บันทึก Objcet ชื่อ MenuDesign
