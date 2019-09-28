@@ -35,12 +35,12 @@ public class FoodTechinque {
 
     private @NonNull String nameTechinques;
 
-    //  @OneToMany(fetch = FetchType.EAGER)
-    //  private Collection<MenuDesign> menuDesign;
+     @OneToMany(fetch = FetchType.EAGER)
+     private Collection<MenuDesign> menuDesign;
 
-    @OneToOne(mappedBy = "foodImage", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private MenuDesign menuDesign;
+    // @OneToOne(mappedBy = "foodImage", cascade = CascadeType.ALL)
+    // @JsonIgnore
+    // private MenuDesign menuDesign;
 
     
 }
