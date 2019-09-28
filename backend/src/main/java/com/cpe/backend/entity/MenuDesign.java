@@ -5,11 +5,14 @@ import lombok.*;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.CascadeType;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,16 +34,17 @@ public class MenuDesign{
     @Column(name="Desciption")
     private @NonNull String desciption;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = FoodImage.class)
-    @JoinColumn(name = "FOODIMAGE_ID", insertable = true)
-    private FoodImage foodImage;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = FoodTechinque.class)
     @JoinColumn(name = "TECHNIQUE_ID", insertable = true)
     private FoodTechinque foodTechinque;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = MenuList.class)
-    @JoinColumn(name = "MENULIST_ID", insertable = true)
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = FoodImage.class)
+    @JoinColumn(name = "FOODIMAGE_ID", referencedColumnName = "FOODIMAGE_ID")
+    private FoodImage foodImage;
+
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = MenuList.class)
+    @JoinColumn(name = "MENULIST_ID", referencedColumnName = "MENULIST_ID",unique = true)
     private MenuList menuList;
 
 }

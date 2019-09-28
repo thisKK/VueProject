@@ -4,14 +4,18 @@ import lombok.*;
 
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,6 +35,12 @@ public class FoodTechinque {
 
     private @NonNull String nameTechinques;
 
-     @OneToMany(fetch = FetchType.EAGER)
-     private Collection<MenuDesign> menuDesign;
+    //  @OneToMany(fetch = FetchType.EAGER)
+    //  private Collection<MenuDesign> menuDesign;
+
+    @OneToOne(mappedBy = "foodImage", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private MenuDesign menuDesign;
+
+    
 }
