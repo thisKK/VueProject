@@ -7,6 +7,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Null;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,7 +34,7 @@ public class FoodImage {
 
     private @NonNull String nameImage;
 
-    private @NonNull String urlImage;
+    private String urlImage;
 
     @OneToOne(mappedBy = "foodImage", cascade = CascadeType.ALL)
     @JsonIgnore

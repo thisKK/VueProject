@@ -26,9 +26,9 @@
         </mdb-navbar-nav>
       </mdb-navbar-toggler>
     </mdb-navbar>
-      <br />
-      <br />
-      <h3 class="title section-heading mb-5 h1 mt-0">MENU</h3>
+    <br />
+    <br />
+    <h3 class="title section-heading mb-5 h1 mt-0">MENU</h3>
     <div>
       <!-- Modal -->
       <!-- <div
@@ -68,7 +68,11 @@
                   <br />
 
                   <label for="defaultFormNameModalEx">รูปภาพ</label>
-                  <select class="browser-default custom-select" v-model="design.foodImage">
+                  <div class="row">
+                    <!-- Grid column -->
+                    <div class="col">
+                      <!-- Default input -->
+                       <select class="browser-default custom-select" v-model="design.foodImage">
                     <option disabled value>เลือกชื่อรูปภาพ</option>
                     <option
                       v-for="image in foodImage"
@@ -76,6 +80,12 @@
                       :value="image.id"
                     >{{image.nameImage}}</option>
                   </select>
+                    </div>
+                    <div>OR</div>
+                    <div class="col">
+                      <input v-model="url" type="text" class="form-control" placeholder="URL Image" />
+                    </div>
+                  </div>
                   <br />
 
                   <!-- Default input techinque -->
@@ -89,9 +99,6 @@
                     >{{techinque.nameTechinques}}</option>
                   </select>
                   <br />
-
-                  <!-- Default textarea message -->
-
                   <mdb-input
                     type="textarea"
                     outline
@@ -127,21 +134,32 @@
           </mdb-card-body>
         </mdb-card>
         <mdb-card class="mycard" v-for="menu in menuDesign" :key="menu.id" :value="menu.id">
-          
           <mdb-view hover>
             <a href="#!">
               <mdb-mask flex-center waves overlay="white-slight"></mdb-mask>
             </a>
-            <div class="view overlay zoom">
-            <mdb-card-image class="image-size" v-bind:src="menu.foodImage.urlImage" alt="Card image cap" >
-            </mdb-card-image>
+            <div v-if="menu.foodImage.urlImage != null" class="view overlay zoom">
+              <mdb-card-image
+                class="image-size"
+                v-bind:src="menu.foodImage.urlImage"
+                alt="Card image cap"
+              ></mdb-card-image>
+            </div>
+            <div v-else class="view overlay zoom">
+              <mdb-card-image
+                class="image-size"
+                v-bind:src="url"
+                alt="Card image cap"
+              ></mdb-card-image>
             </div>
           </mdb-view>
           <mdb-card-body>
             <mdb-card-text class="card-name">{{menu.menuList.name}}</mdb-card-text>
-            <mdb-card-text class="card-techinque">เทคนิคการปรุง:{{menu.foodTechinque.nameTechinques}}</mdb-card-text>
-            <mdb-card-text class = "card-disciption">คำอธิบาย {{menu.desciption}}</mdb-card-text>
-            <mdb-card-text class="card-price" >ราคา:{{menu.menuList.price}} บาท</mdb-card-text>
+            <mdb-card-text
+              class="card-techinque"
+            >เทคนิคการปรุง:{{menu.foodTechinque.nameTechinques}}</mdb-card-text>
+            <mdb-card-text class="card-disciption">คำอธิบาย {{menu.desciption}}</mdb-card-text>
+            <mdb-card-text class="card-price">ราคา:{{menu.menuList.price}} บาท</mdb-card-text>
           </mdb-card-body>
         </mdb-card>
       </div>
@@ -223,6 +241,7 @@ export default {
   },
   data() {
     return {
+      url:"",
       openForm: false,
       menuList: [],
       foodImage: [],
@@ -317,11 +336,10 @@ export default {
 };
 </script>
 <style>
-.title{
-  color:#e3f2fd;
+.title {
+  color: #e3f2fd;
   text-align: center;
-  font-size: 500% !important
-
+  font-size: 500% !important;
 }
 .mycontainer {
   margin-left: 30px !important;
@@ -347,20 +365,20 @@ html {
   width: 100%;
   height: auto;
 }
-.card-name{
-text-align: center;
-font-size:250% !important;
-color: #8ab4f8 !important;
-}
-.card-techinque{
+.card-name {
   text-align: center;
-  font-size:120% !important;
+  font-size: 250% !important;
+  color: #8ab4f8 !important;
 }
-.card-disciption{
-  text-align:center;
-  font-size:50% !important;
+.card-techinque {
+  text-align: center;
+  font-size: 120% !important;
 }
-.card-price{
+.card-disciption {
+  text-align: center;
+  font-size: 50% !important;
+}
+.card-price {
   position: absolute;
   bottom: 8px;
   right: 16px;
@@ -370,9 +388,8 @@ color: #8ab4f8 !important;
   width: 300px !important;
   margin: 2ch;
 }
-.image-size{
+.image-size {
   max-width: 120% !important;
   max-height: 100% !important;
-  
 }
 </style>

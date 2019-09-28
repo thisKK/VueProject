@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
+import javax.validation.constraints.Null;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.CascadeType;
@@ -37,14 +37,14 @@ public class MenuDesign{
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = FoodTechinque.class)
     @JoinColumn(name = "TECHNIQUE_ID", insertable = true)
-    private FoodTechinque foodTechinque;
+    private @NonNull FoodTechinque foodTechinque;
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = FoodImage.class)
-    @JoinColumn(name = "FOODIMAGE_ID", referencedColumnName = "FOODIMAGE_ID",unique = true)
+    @JoinColumn(name = "FOODIMAGE_ID", referencedColumnName = "FOODIMAGE_ID")
     private FoodImage foodImage;
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = MenuList.class)
     @JoinColumn(name = "MENULIST_ID", referencedColumnName = "MENULIST_ID",unique = true)
-    private MenuList menuList;
+    private @NonNull MenuList menuList;
 
 }
