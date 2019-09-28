@@ -44,7 +44,8 @@ public class MenuDesignController {
     @PathVariable long menuListId,
     @PathVariable long foodTechinqueId,
     @PathVariable long foodImageId,
-    @PathVariable String desc) {
+    @PathVariable String desc
+    ) {
 
 
     MenuList menuList = menuListRepository.findById(menuListId);
@@ -59,4 +60,30 @@ public class MenuDesignController {
 
     return menuDesignRepository.save(newMenuDesign); //บันทึก Objcet ชื่อ MenuDesign
     }
+
+    @PostMapping("/createWithUrl/{menuListId}/{foodTechinqueId}/{desc}/{nameImage}/{urlImage}")
+    public MenuDesign newMenuDesign(MenuDesign newMenuDesign,
+    @PathVariable long menuListId,
+    @PathVariable long foodTechinqueId,
+    @PathVariable String desc,
+    @PathVariable String nameImage,
+    @PathVariable String urlImage
+    ){    
+
+        FoodImage foodImage = new FoodImage();
+        foodImage.setNameImage(nameImage);
+        foodImage.setUrlImage(urlImage);
+        foodImageRepository.save(foodImage);
+
+
+        MenuList menuList = menuListRepository.findById(menuListId);
+        FoodTechinque foodTechinque = foodTechinqueRepository.findById(foodTechinqueId);
+        newMenuDesign.setMenuList(menuList);
+        newMenuDesign.setFoodTechinque(foodTechinque);
+        newMenuDesign.setDesciption(desc);
+        newMenuDesign.setFoodImage(foodImage);
+        return menuDesignRepository.save(newMenuDesign); //บันทึก Objcet ชื่อ MenuDesign
+    }
+
+
 }

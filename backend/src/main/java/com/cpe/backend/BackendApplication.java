@@ -28,7 +28,7 @@ public class BackendApplication {
 				{"ข้าวราดกระเพราหมู","https://image.makewebeasy.net/makeweb/0/zs7gnRKvE/TH/%E0%B8%9C%E0%B8%B1%E0%B8%94%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%9E%E0%B8%A3%E0%B8%B2%E0%B9%84%E0%B8%81%E0%B9%88.jpg"},
 				{"ปลานึ่งมะนาว","https://food.mthai.com/app/uploads/2017/02/Spicy-fish-2.jpg"},
 				{"ผัดไทย","https://img.kapook.com/u/2015/surauch/cook2/PT1.jpg"},
-				{"อื่นๆ",null}
+				{"ใช้URLรูปภาพ",null},
 			};
 
 			for(int i= 0 ;i<data.length;i++){
@@ -64,7 +64,6 @@ public class BackendApplication {
 				menuList.setName((String)data[i][0]);
 				menuList.setPrice((Integer)data[i][1]);
 				menuList.setUnits((Integer)data[i][2]);
-
 				menuListRepository.save(menuList);
 			}
 

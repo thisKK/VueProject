@@ -33,8 +33,7 @@ public class MenuDesign{
 
     @Column(name="Desciption")
     private @NonNull String desciption;
-
-
+    
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = FoodTechinque.class)
     @JoinColumn(name = "TECHNIQUE_ID", insertable = true)
     private @NonNull FoodTechinque foodTechinque;
