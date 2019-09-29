@@ -21,7 +21,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "*")
 @Data
 @Entity
 @NoArgsConstructor

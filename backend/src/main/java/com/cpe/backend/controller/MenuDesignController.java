@@ -9,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.cpe.backend.model.*;
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class MenuDesignController {
@@ -61,26 +64,44 @@ public class MenuDesignController {
     return menuDesignRepository.save(newMenuDesign); //บันทึก Objcet ชื่อ MenuDesign
     }
 
-    @PostMapping("/createWithUrl/{menuListId}/{foodTechinqueId}/{desc}/{nameImage}/{urlImage}")
-    public MenuDesign newMenuDesign(MenuDesign newMenuDesign,
-    @PathVariable long menuListId,
-    @PathVariable long foodTechinqueId,
-    @PathVariable String desc,
-    @PathVariable String nameImage,
-    @PathVariable String urlImage
-    ){    
+    @PostMapping("/createWithUrl")
+    @ResponseBody
+    public MenuDesign newMenuDesign(@RequestBody MenuDesignBody menuBody)
+    
+    {    
+    //     (MenuDesign newMenuDesign,
+    // @PathVariable long menuListId,
+    // @PathVariable long foodTechinqueId,
+    // @PathVariable String desc,
+    // @PathVariable String nameImage,
+    // @PathVariable String urlImage
+    // )
+        System.out.println(menuBody.nameImage);
+        System.out.println(menuBody.nameImage);
+        System.out.println(menuBody.nameImage);
+        System.out.println(menuBody.nameImage);
+        System.out.println(menuBody.nameImage);
+        System.out.println();
+        System.out.println(menuBody.urlImage);
+        System.out.println(menuBody.urlImage);
+        System.out.println(menuBody.urlImage);
+        System.out.println(menuBody.urlImage);
+        System.out.println(menuBody.urlImage);
+
+
 
         FoodImage foodImage = new FoodImage();
-        foodImage.setNameImage(nameImage);
-        foodImage.setUrlImage(urlImage);
+        foodImage.setNameImage(menuBody.nameImage);
+        foodImage.setUrlImage(menuBody.urlImage);
         foodImageRepository.save(foodImage);
 
+        MenuList menuList = menuListRepository.findById(menuBody.menuListId);
+        FoodTechinque foodTechinque = foodTechinqueRepository.findById(menuBody.foodTechinqueId);
 
-        MenuList menuList = menuListRepository.findById(menuListId);
-        FoodTechinque foodTechinque = foodTechinqueRepository.findById(foodTechinqueId);
+        MenuDesign newMenuDesign = new MenuDesign();
         newMenuDesign.setMenuList(menuList);
         newMenuDesign.setFoodTechinque(foodTechinque);
-        newMenuDesign.setDesciption(desc);
+        newMenuDesign.setDesciption(menuBody.desc);
         newMenuDesign.setFoodImage(foodImage);
         return menuDesignRepository.save(newMenuDesign); //บันทึก Objcet ชื่อ MenuDesign
     }

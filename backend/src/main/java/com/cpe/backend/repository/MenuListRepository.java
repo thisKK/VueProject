@@ -1,6 +1,4 @@
 package com.cpe.backend.repository;
-
-import com.cpe.backend.entity.FoodImage;
 import com.cpe.backend.entity.MenuList;
 
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -5,9 +5,15 @@ import com.cpe.backend.repository.*;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
+import java.util.Collections;
 import java.util.stream.Stream;
 
 @SpringBootApplication
@@ -28,7 +34,6 @@ public class BackendApplication {
 				{"ข้าวราดกระเพราหมู","https://image.makewebeasy.net/makeweb/0/zs7gnRKvE/TH/%E0%B8%9C%E0%B8%B1%E0%B8%94%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%9E%E0%B8%A3%E0%B8%B2%E0%B9%84%E0%B8%81%E0%B9%88.jpg"},
 				{"ปลานึ่งมะนาว","https://food.mthai.com/app/uploads/2017/02/Spicy-fish-2.jpg"},
 				{"ผัดไทย","https://img.kapook.com/u/2015/surauch/cook2/PT1.jpg"},
-				{"ใช้URLรูปภาพ",null},
 			};
 
 			for(int i= 0 ;i<data.length;i++){
@@ -42,7 +47,8 @@ public class BackendApplication {
 				{"ทอด"},
 				{"ต้ม"},
 				{"นิ่ง"},
-				{"ผัด"}
+				{"ผัด"},
+				{"ตุ๋น"},
 			};
 
 			for(int i= 0 ;i<data.length;i++){
@@ -73,6 +79,24 @@ public class BackendApplication {
 			// 	customerRepository.save(customer); // บันทึก Objcet ชื่อ Customer
 			// });
 		};
+
+		
 	}
+
+	// Fix the CORS errors
+	@Bean
+	public FilterRegistrationBean simpleCorsFilter() {  
+			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();  
+			CorsConfiguration config = new CorsConfiguration();  
+			config.setAllowCredentials(true); 
+			// *** URL below needs to match the Vue client URL and port ***
+			config.setAllowedOrigins(Collections.singletonList("http://localhost:8080")); 
+			config.setAllowedMethods(Collections.singletonList("*"));  
+			config.setAllowedHeaders(Collections.singletonList("*"));  
+			source.registerCorsConfiguration("/**", config);  
+			FilterRegistrationBean bean = new FilterRegistrationBean<>(new CorsFilter(source));
+			bean.setOrder(Ordered.HIGHEST_PRECEDENCE);  
+			return bean;  
+	} 
 
 }

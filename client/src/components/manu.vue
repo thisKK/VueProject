@@ -178,9 +178,9 @@
 
 <script>
 import axios from "axios";
-axios.create({
+const https = axios.create({
   baseURL: "http://localhost:9000/",
-  headers: {
+  heaers: {
     "Access-Control-Allow-Origin": "*",
     "Content-type": "application/json"
   }
@@ -329,19 +329,49 @@ export default {
     },
     saveCreateMenuWithUrl() {
       let currentObj = this;
-      axios
-        .post(
-          "http://localhost:9000/createWithUrl/" +
-            this.design.menuList +
-            "/" +
-            this.design.foodTechinque +
-            "/" +
-            this.design.desciption +
-            "/" +
-            this.design.foodImageNameUrl+
-            "/" +
-            this.design.foodImageUrl
-        )
+      console.log("asdsad");
+      console.log(JSON.stringify({
+            menuList : this.design.menuList,
+            
+            foodTechinque : this.design.foodTechinque,
+            
+            description: this.design.desciption,
+            
+            foodImageNameUrl:this.design.foodImageNameUrl,
+
+            foodImageUrl:this.design.foodImageUrl
+          }));
+          axios({
+            method: 'post',
+            url: 'http://localhost:9000/createWithUrl',
+            headers: {'Content-Type':'application/json'},
+            data: {
+              menuListId : this.design.menuList,
+            
+            foodTechinqueId : this.design.foodTechinque,
+            
+            desc: this.design.desciption,
+            
+            nameImage:this.design.foodImageNameUrl,
+
+            urlImage:this.design.foodImageUrl
+            }
+          })
+      // https
+      //   .post(
+      //     "http://localhost:9000/createWithUrl",
+      //     JSON.stringify({
+      //       menuList : this.design.menuList,
+            
+      //       foodTechinque : this.design.foodTechinque,
+            
+      //       description: this.design.desciption,
+            
+      //       foodImageNameUrl:this.design.foodImageNameUrl,
+
+      //       foodImageUrl:this.design.foodImageUrl
+      //     }),
+      //   )
         .then(response => {
           alert("ออกแบบเมนูสำเร็จ");
           currentObj.openForm = false;

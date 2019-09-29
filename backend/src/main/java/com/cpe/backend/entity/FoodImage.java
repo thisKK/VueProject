@@ -3,24 +3,25 @@ package com.cpe.backend.entity;
 import lombok.*;
 
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Null;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+
+@CrossOrigin(origins = "*")
 @Data
 @Entity
 @NoArgsConstructor
@@ -34,7 +35,7 @@ public class FoodImage {
 
     private @NonNull String nameImage;
 
-    private String urlImage;
+    private @NonNull String urlImage;
 
     @OneToOne(mappedBy = "foodImage", cascade = CascadeType.ALL)
     @JsonIgnore
