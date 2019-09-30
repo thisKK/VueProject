@@ -36,7 +36,7 @@ public class MenuDesign {
     private @NonNull FoodTechinque foodTechinque;
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = FoodImage.class)
-    @JoinColumn(name = "FOODIMAGE_ID", referencedColumnName = "FOODIMAGE_ID")
+    @JoinColumn(name = "FOODIMAGE_ID", referencedColumnName = "FOODIMAGE_ID",unique = true)
     private FoodImage foodImage;
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = Menu.class)

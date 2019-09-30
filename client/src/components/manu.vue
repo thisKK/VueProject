@@ -29,27 +29,16 @@
     <br />
     <br />
     <h3 class="title section-heading mb-5 h1 mt-0">MENU</h3>
-    <div>
-      <!-- Modal -->
-      <!-- <div
-        class="modal fade"
-        id="basicExampleModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >-->
-      <form>
+    <div >
+      <form  >
         <div
           class="modal fade"
           id="basicExampleModal"
-          :show="openForm"
-          @close="openForm = false"
-          ref="my-modal"
+          
         >
-          <div class="modal-dialog" role="document">
+          <div class="modal-dialog" role="document" v-if="openForm == true" >
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header" >
                 <h5 class="modal-title" id="exampleModalLabel">ออกแบบเมนู</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
@@ -62,8 +51,9 @@
                   <!--Body-->
                   <div class="modal-body">
                     <label for="defaultFormNameModalEx">รายการอาหาร</label>
-                    <select class="browser-default custom-select" v-model="design.menu">
-                      <option disabled value>เลือกรายการอาหาร</option>
+                    <select 
+                    class="browser-default custom-select" v-model="design.menu">
+                      <option value="" disabled selected>เลือกรายการอาหาร</option>
                       <option v-for="menuList in menu" :key="menuList.id" :value="menuList.id">{{menuList.menuName}}</option>
                     </select>
                     <br />
@@ -74,7 +64,7 @@
                       <div class="col">
                         <!-- Default input -->
                         <select class="browser-default custom-select" v-model="design.foodImage">
-                          <option value>เลือกชื่อรูปภาพ</option>
+                          <option value="" disabled selected>เลือกชื่อรูปภาพ</option>
                           <option
                             v-for="image in foodImage"
                             :key="image.id"
@@ -110,7 +100,7 @@
                     <!-- Default input techinque -->
                     <label for="defaultFormEmailModalEx">เทคนิคการปรุง</label>
                     <select class="browser-default custom-select" v-model="design.foodTechinque">
-                      <option disabled value>เลือกเทคนิคการปรุง</option>
+                      <option value="" disabled selected>เลือกเทคนิคการปรุง</option>
                       <option
                         v-for="techinque in foodTechinque"
                         :key="techinque.id"
@@ -139,9 +129,9 @@
       </form>
     </div>
 
-    <div class="mycontainer">
-      <div class="d-flex flex-wrap align-content-around">
-        <mdb-card class="mycard" type="button" data-toggle="modal" data-target="#basicExampleModal">
+    <div class="mycontainer" >
+      <div class="d-flex flex-wrap align-content-around" @click="()=>onOpenForm(this)">
+        <mdb-card class="mycard" type="button" data-toggle="modal" data-target="#basicExampleModal" >
           <mdb-view hover>
             <a href="#!">
               <mdb-card-image
@@ -261,12 +251,14 @@ export default {
     return {
       showInsertURL: false,
       openForm: false,
+
       menu: [],
       foodImage: [],
       foodTechinque: [],
       menuDesign: [],
       desciption: "",
       url: "",
+
       design: {
         menu: "",
         foodImage: "",
@@ -279,7 +271,7 @@ export default {
     };
   },
   updated() {
-    console.log(this.design);
+    //console.log(this);
   },
 
   methods: {
@@ -287,6 +279,11 @@ export default {
       //console.log(main);
       main.showInsertURL = !main.showInsertURL;
       main.design.foodImage = "";
+    },
+    onOpenForm(main) {
+      //console.log(main);
+      main.openForm = !main.openForm;
+      //console.log(main.openForm);
     },
     onCreateSubmit(main) {
       if (main.design.foodImage != "") {
@@ -341,19 +338,6 @@ export default {
     },
     saveCreateMenuWithUrl() {
       let currentObj = this;
-      console.log(
-        JSON.stringify({
-          menuId: this.design.menu,
-
-          foodTechinque: this.design.foodTechinque,
-
-          description: this.design.desciption,
-
-          foodImageNameUrl: this.design.foodImageNameUrl,
-
-          foodImageUrl: this.design.foodImageUrl
-        })
-      );
       axios({
         method: "post",
         url: "http://localhost:9000/createWithUrl",
@@ -373,14 +357,18 @@ export default {
       })
         .then(response => {
           alert("ออกแบบเมนูสำเร็จ");
-          currentObj.openForm = false;
           currentObj.getMenuDesign();
+          currentObj.design={};
+          currentObj.showInsertURL = false;
+          currentObj.openForm= false;
         })
         .catch(e => {
           alert("เกิดข้อผิดพลาด " + e);
           currentObj.output = e;
+          currentObj.design={};
+          currentObj.showInsertURL = false;
+          currentObj.openForm= false;
         });
-      this.submitted = true;
     },
 
     saveCreateMenu() {
@@ -398,15 +386,18 @@ export default {
         )
         .then(response => {
           alert("ออกแบบเมนูสำเร็จ");
-          currentObj.openForm = false;
           currentObj.getMenuDesign();
+          currentObj.design={};
+          currentObj.openForm= false;
         })
         .catch(e => {
           alert("เกิดข้อผิดพลาด " + e);
           currentObj.output = e;
+          currentObj.design={};
+          currentObj.showInsertURL = false;
+          currentObj.openForm= false;
         });
-      this.submitted = true;
-    }
+    },
   },
 
   mounted() {
@@ -474,4 +465,4 @@ html {
   max-width: 120% !important;
   max-height: 100% !important;
 }
-</style>
+</style> 
