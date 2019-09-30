@@ -39,8 +39,8 @@ public class MenuDesign {
     @JoinColumn(name = "FOODIMAGE_ID", referencedColumnName = "FOODIMAGE_ID")
     private FoodImage foodImage;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = MenuList.class)
-    @JoinColumn(name = "MENULIST_ID", referencedColumnName = "MENULIST_ID", unique = true)
-    private @NonNull MenuList menuList;
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = Menu.class)
+    @JoinColumn(name = "MENU_ID", referencedColumnName = "MENU_ID", unique = true)
+    private @NonNull Menu menu;
 
 }

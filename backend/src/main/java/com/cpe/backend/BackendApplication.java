@@ -25,7 +25,7 @@ public class BackendApplication {
 
 	@Bean
 	ApplicationRunner init(FoodImageRepository foodImageRepository, FoodTechinqueRepository foodTechinqueRepository,
-			MenuListRepository menuListRepository) {
+			MenuRepository menuRepository) {
 		return args -> {
 			Object[][] data;
 
@@ -56,11 +56,11 @@ public class BackendApplication {
 					{ "ข้าวราดกระเพราหมู", 50, 2 }, { "ผัดไทย", 50, 2 }, };
 
 			for (int i = 0; i < data.length; i++) {
-				MenuList menuList = new MenuList();
-				menuList.setName((String) data[i][0]);
-				menuList.setPrice((Integer) data[i][1]);
-				menuList.setUnits((Integer) data[i][2]);
-				menuListRepository.save(menuList);
+				Menu menu = new Menu();
+				menu.setMenuName((String) data[i][0]);
+				menu.setMenuPrice((Integer) data[i][1]);
+				menu.setMenuUnits((Integer) data[i][2]);
+				menuRepository.save(menu);
 			}
 		};
 

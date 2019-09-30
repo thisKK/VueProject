@@ -17,19 +17,19 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "MENULIST")
-public class MenuList {
+@Table(name = "MENU")
+public class Menu {
     @Id
-    @SequenceGenerator(name = "MENULIST_SEQ", sequenceName = "MENULIST_SEQ")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MENULIST_SEQ")
-    @Column(name = "MENULIST_ID", unique = true, nullable = true)
+    @SequenceGenerator(name = "MENU_SEQ", sequenceName = "MENU_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MENU_SEQ")
+    @Column(name = "MENU_ID", unique = true, nullable = true)
     private @NonNull Long id;
 
-    private @NonNull String name;
-    private @NonNull Integer price;
-    private @NonNull Integer units;
+    private @NonNull String menuName;
+    private @NonNull Integer menuPrice;
+    private @NonNull Integer menuUnits;
 
-    @OneToOne(mappedBy = "menuList", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "menu", cascade = CascadeType.ALL)
     @JsonIgnore
     private MenuDesign menuDesign;
 

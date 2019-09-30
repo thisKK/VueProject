@@ -32,7 +32,4 @@ public class FoodImage {
     @OneToOne(mappedBy = "foodImage", cascade = CascadeType.ALL)
     @JsonIgnore
     private MenuDesign menuDesign;
-
-    // @OneToMany(fetch = FetchType.EAGER)
-    // private Collection<MenuDesign> menuDesign;
 }

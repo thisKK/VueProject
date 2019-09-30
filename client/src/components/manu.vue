@@ -62,9 +62,9 @@
                   <!--Body-->
                   <div class="modal-body">
                     <label for="defaultFormNameModalEx">รายการอาหาร</label>
-                    <select class="browser-default custom-select" v-model="design.menuList">
+                    <select class="browser-default custom-select" v-model="design.menu">
                       <option disabled value>เลือกรายการอาหาร</option>
-                      <option v-for="menu in menuList" :key="menu.id" :value="menu.id">{{menu.name}}</option>
+                      <option v-for="menuList in menu" :key="menuList.id" :value="menuList.id">{{menuList.menuName}}</option>
                     </select>
                     <br />
 
@@ -155,15 +155,15 @@
             <mdb-card-text style="text-align: center;font-size:300% ; color: #00e676">เพิ่มเมนู</mdb-card-text>
           </mdb-card-body>
         </mdb-card>
-        <mdb-card class="mycard" v-for="menu in menuDesign" :key="menu.id" :value="menu.id">
+        <mdb-card class="mycard" v-for="menuList in menuDesign" :key="menuList.id" :value="menuList.id">
           <mdb-view hover>
             <a href="#!">
               <mdb-mask flex-center waves overlay="white-slight"></mdb-mask>
             </a>
-            <div v-if="menu.foodImage.urlImage != null" class="view overlay zoom">
+            <div v-if="menuList.foodImage.urlImage != null" class="view overlay zoom">
               <mdb-card-image
                 class="image-size"
-                v-bind:src="menu.foodImage.urlImage"
+                v-bind:src="menuList.foodImage.urlImage"
                 alt="Card image cap"
               ></mdb-card-image>
             </div>
@@ -172,12 +172,12 @@
             </div>
           </mdb-view>
           <mdb-card-body>
-            <mdb-card-text class="card-name">{{menu.menuList.name}}</mdb-card-text>
+            <mdb-card-text class="card-name">{{menuList.menu.menuName}}</mdb-card-text>
             <mdb-card-text
               class="card-techinque"
-            >เทคนิคการปรุง:{{menu.foodTechinque.nameTechinques}}</mdb-card-text>
-            <mdb-card-text class="card-disciption">คำอธิบาย {{menu.desciption}}</mdb-card-text>
-            <mdb-card-text class="card-price">ราคา:{{menu.menuList.price}} บาท</mdb-card-text>
+            >เทคนิคการปรุง:{{menuList.foodTechinque.nameTechinques}}</mdb-card-text>
+            <mdb-card-text class="card-disciption">คำอธิบาย {{menuList.desciption}}</mdb-card-text>
+            <mdb-card-text class="card-price">ราคา:{{menuList.menu.menuPrice}} บาท</mdb-card-text>
           </mdb-card-body>
         </mdb-card>
       </div>
@@ -261,14 +261,14 @@ export default {
     return {
       showInsertURL: false,
       openForm: false,
-      menuList: [],
+      menu: [],
       foodImage: [],
       foodTechinque: [],
       menuDesign: [],
       desciption: "",
       url: "",
       design: {
-        menuList: "",
+        menu: "",
         foodImage: "",
         foodImageUrl: "",
         foodImageNameUrl: "",
@@ -308,11 +308,11 @@ export default {
           console.log(e);
         });
     },
-    getMenuList() {
+    getMenu() {
       axios
-        .get("http://localhost:9000/getMenuList")
+        .get("http://localhost:9000/getMenu")
         .then(response => {
-          this.menuList = response.data;
+          this.menu = response.data;
         })
         .catch(e => {
           console.log(e);
@@ -341,10 +341,9 @@ export default {
     },
     saveCreateMenuWithUrl() {
       let currentObj = this;
-      console.log("asdsad");
       console.log(
         JSON.stringify({
-          menuList: this.design.menuList,
+          menuId: this.design.menu,
 
           foodTechinque: this.design.foodTechinque,
 
@@ -360,7 +359,8 @@ export default {
         url: "http://localhost:9000/createWithUrl",
         headers: { "Content-Type": "application/json" },
         data: {
-          menuListId: this.design.menuList,
+          
+          menuId: this.design.menu,
 
           foodTechinqueId: this.design.foodTechinque,
 
@@ -388,7 +388,7 @@ export default {
       axios
         .post(
           "http://localhost:9000/createMenuDesign/" +
-            this.design.menuList +
+            this.design.menu +
             "/" +
             this.design.foodImage +
             "/" +
@@ -411,7 +411,7 @@ export default {
 
   mounted() {
     this.getFoodImage();
-    this.getMenuList();
+    this.getMenu();
     this.getFoodTechinque();
     this.getMenuDesign();
   }
