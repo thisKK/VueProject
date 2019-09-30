@@ -35,14 +35,4 @@ public class FoodImageController {
         return foodimage;
     }
 
-    // @PostMapping("/postImage/{nameImage}/{urlImage}")
-    // public FoodImage newFoodImage(FoodImage newFoodImage,
-    // @PathVariable String nameImage,
-    // @PathVariable String urlImage
-    // ){    
-    //     newFoodImage.setNameImage(nameImage);
-    //     newFoodImage.setUrlImage(urlImage);
-    
-    //     return foodImageRepository.save(newFoodImage); //บันทึก Objcet ชื่อ FoodImage
-    //     }
 }

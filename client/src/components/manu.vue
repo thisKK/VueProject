@@ -83,19 +83,28 @@
                         </select>
                       </div>
                       <div class="col">
-                        <button
-                          @click="()=>onShowInsertURL(this)"
-                          class="btn btn-primary btn-sm"
-                        >
+                        <button @click="()=>onShowInsertURL(this)" class="btn btn-primary btn-sm">
                           <i class="fas fa-magic mr-1"></i> with URL
                         </button>
                       </div>
                     </div>
 
                     <div v-if="showInsertURL ==true">
-                      <mdb-input v-model="design.foodImageNameUrl" type="textarea" outline :rows="1" label="ชื่อรูปภาพ" />
+                      <mdb-input
+                        v-model="design.foodImageNameUrl"
+                        type="textarea"
+                        outline
+                        :rows="1"
+                        label="ชื่อรูปภาพ"
+                      />
 
-                      <mdb-input v-model="design.foodImageUrl" type="textarea" outline :rows="1" label="URL รูปภาพ" />
+                      <mdb-input
+                        v-model="design.foodImageUrl"
+                        type="textarea"
+                        outline
+                        :rows="1"
+                        label="URL รูปภาพ"
+                      />
                     </div>
 
                     <!-- Default input techinque -->
@@ -269,20 +278,23 @@ export default {
       }
     };
   },
-  updated(){
-    console.log(this.design)
+  updated() {
+    console.log(this.design);
   },
-  
+
   methods: {
-    onShowInsertURL(main){
+    onShowInsertURL(main) {
       //console.log(main);
       main.showInsertURL = !main.showInsertURL;
       main.design.foodImage = "";
     },
-    onCreateSubmit(main){
-      if(main.design.foodImage != ""){
+    onCreateSubmit(main) {
+      if (main.design.foodImage != "") {
         main.saveCreateMenu();
-      }else if(main.design.foodImageUrl != "" && main.design.foodImageNameUrl != ""){
+      } else if (
+        main.design.foodImageUrl != "" &&
+        main.design.foodImageNameUrl != ""
+      ) {
         main.saveCreateMenuWithUrl();
       }
     },
@@ -330,48 +342,35 @@ export default {
     saveCreateMenuWithUrl() {
       let currentObj = this;
       console.log("asdsad");
-      console.log(JSON.stringify({
-            menuList : this.design.menuList,
-            
-            foodTechinque : this.design.foodTechinque,
-            
-            description: this.design.desciption,
-            
-            foodImageNameUrl:this.design.foodImageNameUrl,
+      console.log(
+        JSON.stringify({
+          menuList: this.design.menuList,
 
-            foodImageUrl:this.design.foodImageUrl
-          }));
-          axios({
-            method: 'post',
-            url: 'http://localhost:9000/createWithUrl',
-            headers: {'Content-Type':'application/json'},
-            data: {
-              menuListId : this.design.menuList,
-            
-            foodTechinqueId : this.design.foodTechinque,
-            
-            desc: this.design.desciption,
-            
-            nameImage:this.design.foodImageNameUrl,
+          foodTechinque: this.design.foodTechinque,
 
-            urlImage:this.design.foodImageUrl
-            }
-          })
-      // https
-      //   .post(
-      //     "http://localhost:9000/createWithUrl",
-      //     JSON.stringify({
-      //       menuList : this.design.menuList,
-            
-      //       foodTechinque : this.design.foodTechinque,
-            
-      //       description: this.design.desciption,
-            
-      //       foodImageNameUrl:this.design.foodImageNameUrl,
+          description: this.design.desciption,
 
-      //       foodImageUrl:this.design.foodImageUrl
-      //     }),
-      //   )
+          foodImageNameUrl: this.design.foodImageNameUrl,
+
+          foodImageUrl: this.design.foodImageUrl
+        })
+      );
+      axios({
+        method: "post",
+        url: "http://localhost:9000/createWithUrl",
+        headers: { "Content-Type": "application/json" },
+        data: {
+          menuListId: this.design.menuList,
+
+          foodTechinqueId: this.design.foodTechinque,
+
+          desc: this.design.desciption,
+
+          nameImage: this.design.foodImageNameUrl,
+
+          urlImage: this.design.foodImageUrl
+        }
+      })
         .then(response => {
           alert("ออกแบบเมนูสำเร็จ");
           currentObj.openForm = false;

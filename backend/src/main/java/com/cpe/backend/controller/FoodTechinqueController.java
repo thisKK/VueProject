@@ -2,14 +2,9 @@ package com.cpe.backend.controller;
 
 import com.cpe.backend.entity.FoodTechinque;
 import com.cpe.backend.repository.FoodTechinqueRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.RestController;
-
-
 import java.util.Collection;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,7 +16,7 @@ public class FoodTechinqueController {
     @Autowired
     private final FoodTechinqueRepository foodTechinqueRepository;
 
-    public FoodTechinqueController (FoodTechinqueRepository foodTechinqueRepository) {
+    public FoodTechinqueController(FoodTechinqueRepository foodTechinqueRepository) {
         this.foodTechinqueRepository = foodTechinqueRepository;
     }
 
