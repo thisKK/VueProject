@@ -1,7 +1,7 @@
-package com.cpe.backend;
+package com.cpe.backend.menudesign;
 
-import com.cpe.backend.entity.*;
-import com.cpe.backend.repository.*;
+import com.cpe.backend.menudesign.entity.*;
+import com.cpe.backend.menudesign.repository.*;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
