@@ -282,7 +282,7 @@ export default {
     },
     onOpenForm(main) {
       //console.log(main);
-      main.openForm = !main.openForm;
+      main.openForm = true;
       //console.log(main.openForm);
     },
     onCreateSubmit(main) {
