@@ -17,6 +17,10 @@ import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import com.cpe.backend.menudesign.model.*;
 
+import com.cpe.backend.menu.*;
+import com.cpe.backend.menu.entity.*;
+import com.cpe.backend.menu.repository.*;
+
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class MenuDesignController {
@@ -46,7 +50,7 @@ public class MenuDesignController {
     public MenuDesign newMenuDesign(MenuDesign newMenuDesign, @PathVariable long menuId,
             @PathVariable long foodTechinqueId, @PathVariable long foodImageId, @PathVariable String desc) {
 
-        Menu menu = menuRepository.findById(menuId);
+        Menu menu = menuRepository.findById(menuId).get();
         FoodTechinque foodTechinque = foodTechinqueRepository.findById(foodTechinqueId);
         FoodImage foodImage = foodImageRepository.findById(foodImageId);
 
@@ -67,7 +71,7 @@ public class MenuDesignController {
         foodImage.setUrlImage(menuBody.urlImage);
         foodImageRepository.save(foodImage);
 
-        Menu menu = menuRepository.findById(menuBody.menuId);
+        Menu menu = menuRepository.findById(menuBody.menuId).get();
         FoodTechinque foodTechinque = foodTechinqueRepository.findById(menuBody.foodTechinqueId);
 
         MenuDesign newMenuDesign = new MenuDesign();

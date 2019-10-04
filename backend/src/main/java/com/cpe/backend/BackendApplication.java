@@ -1,7 +1,4 @@
-package com.cpe.backend.menudesign;
-
-import com.cpe.backend.menudesign.entity.*;
-import com.cpe.backend.menudesign.repository.*;
+package com.cpe.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +13,20 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Collections;
 import java.util.stream.Stream;
 
+import com.cpe.backend.menu.entity.Appropriate;
+import com.cpe.backend.menu.entity.Menu;
+import com.cpe.backend.menu.entity.MenuType;
+import com.cpe.backend.menu.entity.Nation;
+import com.cpe.backend.menu.repository.AppropriateRepository;
+import com.cpe.backend.menu.repository.MenuRepository;
+import com.cpe.backend.menu.repository.MenuTypeRepository;
+import com.cpe.backend.menu.repository.NationRepository;
+
+import com.cpe.backend.menudesign.entity.FoodImage;
+import com.cpe.backend.menudesign.entity.FoodTechinque;
+import com.cpe.backend.menudesign.repository.FoodImageRepository;
+import com.cpe.backend.menudesign.repository.FoodTechinqueRepository;
+
 @SpringBootApplication
 public class BackendApplication {
 
@@ -25,7 +36,7 @@ public class BackendApplication {
 
 	@Bean
 	ApplicationRunner init(FoodImageRepository foodImageRepository, FoodTechinqueRepository foodTechinqueRepository,
-			MenuRepository menuRepository) {
+			MenuRepository menuRepository,AppropriateRepository appropriateRepository,MenuTypeRepository menuTypeRepository,NationRepository nationRepository) {
 		return args -> {
 			Object[][] data;
 
@@ -62,6 +73,30 @@ public class BackendApplication {
 				menu.setMenuUnits((Integer) data[i][2]);
 				menuRepository.save(menu);
 			}
+
+
+			data = new Object[][] { { "55" }, { "66" }, { "77" }, { "88" }, { "99" }, };
+			for (int i = 0; i < data.length; i++) {
+				Appropriate appropriate = new Appropriate();
+				appropriate.setAppropriationName((String) data[i][0]);
+				appropriateRepository.save(appropriate);
+			}
+
+			data = new Object[][] { { "sada" }, { "asd" }, { "sad" }, { "sad" }, { "asd" }, };
+			for (int i = 0; i < data.length; i++) {
+				MenuType menuType = new MenuType();
+				menuType.setTypeName((String) data[i][0]);
+				menuTypeRepository.save(menuType);
+			}
+
+			data = new Object[][] { { "sada" }, { "asd" }, { "sad" }, { "sad" }, { "asd" }, };
+			for (int i = 0; i < data.length; i++) {
+				Nation nation = new Nation();
+				nation.setNationName((String) data[i][0]);
+				nationRepository.save(nation);
+			}
+
+
 		};
 
 	}

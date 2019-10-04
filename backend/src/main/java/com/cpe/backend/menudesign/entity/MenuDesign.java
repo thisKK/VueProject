@@ -7,6 +7,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.cpe.backend.menu.entity.Menu;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
